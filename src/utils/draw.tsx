@@ -3,8 +3,8 @@ export function drawPixel(
   canvas: HTMLCanvasElement,
   x: number,
   y: number,
-  pixSize: number = 10,
-  color: string = "black"
+  color: string = "black",
+  pixSize: number = 10
 ) {
   const ctx = canvas.getContext("2d");
   console.log(canvas.offsetLeft, canvas.offsetTop);
@@ -45,8 +45,8 @@ export function erasePixel(
 // Draw a grid on canvas
 export function drawGrid(
   canvas: HTMLCanvasElement,
-  pixSize: number = 10,
-  color: string = "#999"
+  color: string = "#999",
+  pixSize: number = 10
 ) {
   const ctx = canvas.getContext("2d");
   if (ctx) {

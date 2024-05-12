@@ -5,17 +5,24 @@ interface CanvasProps {
   algo: string;
   clear: boolean;
   mode: string;
+  color: string;
   setClear: (clear: boolean) => void;
 }
 
-export default function Canvas({ algo, clear, mode, setClear }: CanvasProps) {
+export default function Canvas({
+  algo,
+  clear,
+  mode,
+  color,
+  setClear,
+}: CanvasProps) {
   if (clear) {
     const canvas = document.querySelector("canvas") as HTMLCanvasElement;
     const ctx = canvas.getContext("2d");
     if (ctx) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
     }
-    drawGrid(canvas, 10, "#999");
+    drawGrid(canvas);
   }
 
   useEffect(() => {
@@ -32,7 +39,8 @@ export default function Canvas({ algo, clear, mode, setClear }: CanvasProps) {
       drawPixel(
         event.target as HTMLCanvasElement,
         event.clientX + window.scrollX,
-        event.clientY + window.scrollY
+        event.clientY + window.scrollY,
+        color
       );
     } else if (mode === "erase") {
       erasePixel(
@@ -46,7 +54,7 @@ export default function Canvas({ algo, clear, mode, setClear }: CanvasProps) {
   useEffect(() => {
     const canvas = document.querySelector("canvas") as HTMLCanvasElement;
 
-    drawGrid(canvas, 10, "#999");
+    drawGrid(canvas);
   }, []);
 
   return (
