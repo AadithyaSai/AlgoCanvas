@@ -7,11 +7,11 @@ export function drawPixel(
   pixSize: number = 10
 ) {
   const ctx = canvas.getContext("2d");
-  console.log(canvas.offsetLeft, canvas.offsetTop);
+
   if (ctx) {
     ctx.fillStyle = color;
-    let pixX = Math.floor((x - canvas.offsetLeft) / 10) * 10;
-    let pixY = Math.floor((y - canvas.offsetTop) / 10) * 10;
+    let pixX = Math.floor(x / 10) * 10;
+    let pixY = Math.floor(y / 10) * 10;
     ctx.fillRect(pixX, pixY, pixSize, pixSize);
   }
 }
@@ -27,15 +27,8 @@ export function erasePixel(
   if (ctx) {
     ctx;
     ctx.clearRect(
-      Math.floor((x - canvas.offsetLeft) / pixSize) * pixSize,
-      Math.floor((y - canvas.offsetTop) / pixSize) * pixSize,
-      pixSize,
-      pixSize
-    );
-
-    ctx.strokeRect(
-      Math.floor((x - canvas.offsetLeft) / pixSize) * pixSize,
-      Math.floor((y - canvas.offsetTop) / pixSize) * pixSize,
+      Math.floor(x / pixSize) * pixSize,
+      Math.floor(y / pixSize) * pixSize,
       pixSize,
       pixSize
     );

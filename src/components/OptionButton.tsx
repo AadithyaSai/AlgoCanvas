@@ -13,7 +13,7 @@ export default function OptionButton({
 }: OptionButtonProps) {
   return (
     <button
-      className={"text-white rounded px-1.5 py-1 m-1" + " " + styleString}
+      className={"text-white rounded px-2 mx-1" + " " + styleString}
       title={title}
       onClick={() => onClickHandler(true)}
     >

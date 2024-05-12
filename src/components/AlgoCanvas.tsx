@@ -3,13 +3,13 @@ import Canvas from "./Canvas";
 import { OptionsBar } from "./OptionsBar";
 
 export default function AlgoCanvas() {
-  const [algo, setAlgo] = useState("");
+  const [algo, setAlgo] = useState("dda");
   const [clear, setClear] = useState(false);
   const [mode, setMode] = useState("draw");
-  const [color, setColor] = useState("black");
+  const [color, setColor] = useState("#000000");
 
   return (
-    <div className="w-fit m-1 p-1 bg-gray-600 rounded">
+    <div className="w-fit m-1 p-1 pt-0 bg-gray-600 rounded">
       <OptionsBar
         mode={mode}
         algo={algo}
