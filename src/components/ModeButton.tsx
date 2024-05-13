@@ -13,7 +13,7 @@ export default function ModeButton({
 }: ModeButtonProps) {
   return (
     <button
-      className={`text-white rounded px-1.5 py-1 mx-1 ${
+      className={`text-white rounded px-1.5 py-1 ${
         globalMode === mode
           ? "bg-green-700  hover:bg-green-600"
           : "bg-transparent border border-gray-500 hover:bg-gray-800"

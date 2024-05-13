@@ -1,11 +1,13 @@
 interface AlgorithmSelectProps {
   algo: string;
   onAlgoChange: (algo: string) => void;
+  isDisabled: boolean;
 }
 
 export default function AlgorithmSelect({
   algo,
   onAlgoChange,
+  isDisabled,
 }: AlgorithmSelectProps) {
   return (
     <div>
@@ -16,7 +18,8 @@ export default function AlgorithmSelect({
         id="algo"
         name="algo"
         value={algo}
-        className="block py-2.5 px-1.5 w-full text-sm text-white rounded border-0 border-gray-200 bg-gray-800 focus:ring-0 focus:border-gray-300 focus:bg-gray-900 hover:bg-gray-900"
+        disabled={isDisabled}
+        className="block py-2.5 px-1.5 w-full text-sm text-white rounded border-0 border-gray-200 bg-gray-800 focus:ring-0 focus:border-gray-300 focus:bg-gray-900 hover:bg-gray-900 disabled:hover:bg-gray-800 disabled:text-gray-400 "
         onChange={(e) => onAlgoChange(e.target.value)}
       >
         <optgroup label="Line Drawing Algorithms">

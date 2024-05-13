@@ -43,6 +43,24 @@ export function clearCanvas(canvas: HTMLCanvasElement) {
   }
 }
 
+// Resize the canvas
+export function resizeCanvas(
+  canvas: HTMLCanvasElement,
+  width: number,
+  height: number,
+  keepContent: boolean = false
+) {
+  const ctx = canvas.getContext("2d");
+  if (ctx) {
+    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+    canvas.width = width;
+    canvas.height = height;
+    if (keepContent) {
+      ctx.putImageData(imgData, 0, 0);
+    }
+  }
+}
+
 // Draw a grid on canvas
 export function drawGrid(
   canvas: HTMLCanvasElement,

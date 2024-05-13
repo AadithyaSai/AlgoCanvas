@@ -1,10 +1,5 @@
-import AlgoCanvas from "./components/AlgoCanvas.tsx";
+import Home from "./components/Home.tsx";
 
 export default function App() {
-  return (
-    <div>
-      <h1 className="text-4xl font-bold">AlgoCanvas</h1>
-      <AlgoCanvas />
-    </div>
-  );
+  return <Home />;
 }

@@ -1,6 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { clearCanvas, drawGrid, drawPixel, erasePixel } from "../utils/draw";
-import { Algorithm } from "../utils/base";
+import { Algorithm, setWindowBounds } from "../utils/base";
 import { FloodFill } from "../utils/fill";
 import { BresenhamLine, DDALine } from "../utils/lines";
 import { MidPointCircle } from "../utils/circles";
@@ -20,14 +20,16 @@ export default function Canvas({
   color,
   setClear,
 }: CanvasProps) {
-  let canvas = document.getElementById("main-canvas") as HTMLCanvasElement;
-  let grid = document.getElementById("grid-canvas") as HTMLCanvasElement;
-  let preview = document.getElementById("preview-canvas") as HTMLCanvasElement;
+  let canvas = useRef<HTMLCanvasElement>(null);
+  let grid = useRef<HTMLCanvasElement>(null);
+  let preview = useRef<HTMLCanvasElement>(null);
 
+  let [h, setH] = useState(600);
+  let [w, setW] = useState(800);
   let algorithm: Algorithm | null = null;
 
   if (clear) {
-    clearCanvas(canvas);
+    clearCanvas(canvas.current!);
   }
 
   useEffect(() => {
@@ -41,14 +43,14 @@ export default function Canvas({
     }
     if (mode === "draw") {
       drawPixel(
-        canvas,
+        canvas.current!,
         event.pageX - event.currentTarget.offsetLeft,
         event.pageY - event.currentTarget.offsetTop,
         color
       );
     } else if (mode === "erase") {
       erasePixel(
-        canvas,
+        canvas.current!,
         event.pageX - event.currentTarget.offsetLeft,
         event.pageY - event.currentTarget.offsetTop
       );
@@ -69,14 +71,24 @@ export default function Canvas({
             break;
           case "floodFill4":
             imageData = canvas
-              .getContext("2d")!
-              .getImageData(0, 0, canvas.width, canvas.height);
+              .current!.getContext("2d")!
+              .getImageData(
+                0,
+                0,
+                canvas.current!.width,
+                canvas.current!.height
+              );
             algorithm = new FloodFill(color, imageData, false);
             break;
           case "floodFill8":
             imageData = canvas
-              .getContext("2d")!
-              .getImageData(0, 0, canvas.width, canvas.height);
+              .current!.getContext("2d")!
+              .getImageData(
+                0,
+                0,
+                canvas.current!.width,
+                canvas.current!.height
+              );
             algorithm = new FloodFill(color, imageData, true);
             break;
           default:
@@ -89,51 +101,65 @@ export default function Canvas({
         color
       );
       drawPixel(
-        preview,
+        preview.current!,
         event.pageX - event.currentTarget.offsetLeft,
         event.pageY - event.currentTarget.offsetTop,
         color + "80"
       );
       if (algorithm?.readyToRun()) {
         algorithm?.run();
-        algorithm?.draw(canvas);
-        clearCanvas(preview);
+        algorithm?.draw(canvas.current!);
+        clearCanvas(preview.current!);
         algorithm = null;
       }
     }
   };
 
   useEffect(() => {
-    canvas = document.getElementById("main-canvas") as HTMLCanvasElement;
-    grid = document.getElementById("grid-canvas") as HTMLCanvasElement;
-    drawGrid(grid);
-  }, []);
+    setWindowBounds(w, h);
+    drawGrid(grid.current!, "#888");
+  }, [w, h]);
 
   return (
     <div className="grid">
       <canvas
+        ref={canvas}
         id="main-canvas"
-        className="col-start-1 row-start-1 z-1 mx-1 p-1 bg-gray-300"
-        width="800"
-        height="600"
+        className="col-start-1 row-start-1 z-1 mx-1 p-1 bg-gray-700 rounded cursor-crosshair"
+        width={w}
+        height={h}
         onMouseMove={drawOnCanvas}
         onMouseDown={(event) => {
           isDrawing = true;
           drawOnCanvas(event);
         }}
         onMouseUp={() => (isDrawing = false)}
+        onContextMenu={(e) => {
+          e.preventDefault();
+        }}
+        onClick={(e) => {
+          if (e.ctrlKey) {
+            setW(w - 100);
+            setH(h - 100);
+          } else if (e.shiftKey) {
+            setW(w + 100);
+            setH(h + 100);
+          }
+        }}
       />
       <canvas
+        ref={grid}
         id="grid-canvas"
         className="col-start-1 row-start-1 z-0 mx-1 p-1 pointer-events-none"
-        width="800"
-        height="600"
+        width={w}
+        height={h}
       />
       <canvas
+        ref={preview}
         id="preview-canvas"
         className="col-start-1 row-start-1 z-2 mx-1 p-1 pointer-events-none"
-        width="800"
-        height="600"
+        width={w}
+        height={h}
       />
     </div>
   );

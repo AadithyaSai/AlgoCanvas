@@ -20,7 +20,7 @@ export default function ModeBar({ mode, onModeChange }: ModeBarProps) {
   const algoIcon = <FontAwesomeIcon icon={faSquareRootVariable} />;
 
   return (
-    <div className="flex bg-gray-700 mx-1 py-1 rounded">
+    <div className="flex gap-x-1 bg-gray-700 mx-1 px-1.5 py-1 rounded">
       <ModeButton
         mode="draw"
         globalMode={mode}
