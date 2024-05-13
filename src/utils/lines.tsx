@@ -1,5 +1,4 @@
 import { Algorithm } from "./base";
-import { drawPixel } from "./draw";
 
 export class DDALine extends Algorithm {
   drawColor: string = "black";
@@ -9,20 +8,14 @@ export class DDALine extends Algorithm {
   }
 
   addInput(dataX: number, dataY: number, color: string): void {
-    dataX = Math.floor(dataX / 10) * 10;
-    dataY = Math.floor(dataY / 10) * 10;
+    dataX = Math.floor(dataX / 10);
+    dataY = Math.floor(dataY / 10);
     this.drawColor = color;
     super.addInput(dataX, dataY, color);
   }
 
   run() {
     this.dda();
-  }
-
-  draw(canvas: HTMLCanvasElement) {
-    this.result.forEach((point) => {
-      drawPixel(canvas, point.x, point.y, this.drawColor);
-    });
   }
 
   // DDA algorithm
@@ -38,7 +31,11 @@ export class DDALine extends Algorithm {
     let y = y1;
 
     for (let i = 0; i <= steps; i++) {
-      this.result.push({ x: Math.round(x), y: Math.round(y), color: "" });
+      this.result.push({
+        x: Math.round(x) * 10,
+        y: Math.round(y) * 10,
+        color: this.drawColor,
+      });
       x += xInc;
       y += yInc;
     }
@@ -63,44 +60,75 @@ export class BresenhamLine extends Algorithm {
     this.bresenham();
   }
 
-  draw(canvas: HTMLCanvasElement) {
-    this.result.forEach((point) => {
-      drawPixel(canvas, point.x, point.y, this.drawColor);
-    });
-  }
-
-  // Bresenham algorithm
+  // Bresenham algorithm. Source: Wikipedia
   bresenham() {
     const { x: x1, y: y1 } = this.inputBuffer[0];
     const { x: x2, y: y2 } = this.inputBuffer[1];
-    let dx = Math.abs(x2 - x1);
-    let dy = Math.abs(y2 - y1);
+
+    if (Math.abs(y2 - y1) < Math.abs(x2 - x1)) {
+      if (x1 > x2) {
+        this.bresenhamLow(x2, y2, x1, y1);
+      } else {
+        this.bresenhamLow(x1, y1, x2, y2);
+      }
+    } else {
+      if (y1 > y2) {
+        this.bresenhamHigh(x2, y2, x1, y1);
+      } else {
+        this.bresenhamHigh(x1, y1, x2, y2);
+      }
+    }
+  }
+
+  bresenhamLow(x1: number, y1: number, x2: number, y2: number) {
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    let yIncr = 10;
+
+    if (dy < 0) {
+      yIncr = -yIncr;
+      dy = -dy;
+    }
+
     let p = 2 * dy - dx;
     let twoDy = 2 * dy;
     let twoDyMinusDx = 2 * (dy - dx);
-    let x, y, xEnd;
+    let y = y1;
 
-    if (x1 > x2) {
-      x = x2;
-      y = y2;
-      xEnd = x1;
-    } else {
-      x = x1;
-      y = y1;
-      xEnd = x2;
-    }
-
-    this.result.push({ x, y, color: "" });
-
-    while (x < xEnd) {
-      x++;
+    for (let x = x1; x <= x2; x += 10) {
+      this.result.push({ x, y, color: this.drawColor });
       if (p < 0) {
         p += twoDy;
       } else {
-        y++;
+        y += yIncr;
         p += twoDyMinusDx;
       }
-      this.result.push({ x, y, color: "" });
+    }
+  }
+
+  bresenhamHigh(x1: number, y1: number, x2: number, y2: number) {
+    let dx = x2 - x1;
+    let dy = y2 - y1;
+    let xIncr = 10;
+
+    if (dx < 0) {
+      xIncr = -xIncr;
+      dx = -dx;
+    }
+
+    let p = 2 * dx - dy;
+    let twoDx = 2 * dx;
+    let twoDxMinusDy = 2 * (dx - dy);
+    let x = x1;
+
+    for (let y = y1; y <= y2; y += 10) {
+      this.result.push({ x, y, color: this.drawColor });
+      if (p < 0) {
+        p += twoDx;
+      } else {
+        x += xIncr;
+        p += twoDxMinusDy;
+      }
     }
   }
 }

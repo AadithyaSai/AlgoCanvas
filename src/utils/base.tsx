@@ -1,12 +1,12 @@
-export let winX = 800;
-export let winY = 600;
-let scale = 10;
+import { drawPixel } from "./draw";
+
+let winX = 800;
+let winY = 600;
 
 // Set the window bounds
-export function setWindowBounds(w: number, h: number, pixSize: number = 10) {
+export function setWindowBounds(w: number, h: number) {
   winX = w;
   winY = h;
-  scale = pixSize;
 }
 
 // Get the window bounds
@@ -49,5 +49,9 @@ export abstract class Algorithm {
   abstract run(): void;
 
   // draw the results
-  abstract draw(canvas: HTMLCanvasElement): void;
+  draw(canvas: HTMLCanvasElement) {
+    this.result.forEach((point) => {
+      drawPixel(canvas, point.x, point.y, point.color);
+    });
+  }
 }

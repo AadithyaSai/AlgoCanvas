@@ -27,8 +27,8 @@ export default function AlgorithmSelect({
           <option value="midPointCircle">Midpoint Circle Drawing</option>
         </optgroup>
         <optgroup label="Fill Algorithms">
-          <option value="floodFill">Flood Fill</option>
-          <option value="boundaryFill">Boundary Fill</option>
+          <option value="floodFill4">4 Point Flood Fill</option>
+          <option value="floodFill8">8 Point Flood Fill</option>
         </optgroup>
       </select>
     </div>
