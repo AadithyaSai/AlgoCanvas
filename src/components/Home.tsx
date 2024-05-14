@@ -23,7 +23,7 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900 flex flex-col justify-between min-h-svh">
+    <div className="bg-gray-900 flex flex-col justify-between min-h-svh">
       <DesignFlecks />
       <HeroSection handleButtonClick={setFocus} />
       <AlgoCanvas focus={focus} setFocus={setFocus} />

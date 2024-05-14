@@ -19,7 +19,7 @@ export default function HeroSection({ handleButtonClick }: HeroSectionProps) {
           />
         </div>
         <div className="mr-auto place-self-center sm:col-span-7 sm:order-1">
-          <h1 className="flex justify-center max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none text-center sm:text-5xl xl:text-6xl dark:text-white">
+          <h1 className="flex justify-center max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none text-center sm:text-5xl xl:text-6xl text-white">
             {"AlgoCanvas".split("").map((char, index) => {
               if (index % 2 == 0) {
                 return (
@@ -36,14 +36,14 @@ export default function HeroSection({ handleButtonClick }: HeroSectionProps) {
               }
             })}
           </h1>
-          <p className="max-w-2xl mb-6 font-light text-gray-500 sm:mb-8 text-center sm:text-lg md:text-xl dark:text-gray-400">
+          <p className="max-w-2xl mb-6 font-light sm:mb-8 text-center sm:text-lg md:text-xl text-gray-400">
             Create the perfect pixel art while exploring classic Computer
             Graphics algorithms. Learn while having fun!
           </p>
           <div className="text-center">
             <button
               onClick={() => handleButtonClick(true)}
-              className="inline-flex animate-shake items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 dark:focus:ring-primary-900"
+              className="inline-flex animate-shake items-center justify-center px-5 py-3 text-base font-medium text-center text-white rounded-lg bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-900"
             >
               Try It Out
               <FontAwesomeIcon icon={faArrowRight} className="ml-2" />
