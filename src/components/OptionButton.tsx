@@ -1,9 +1,9 @@
-interface OptionButtonProps {
+type OptionButtonProps = {
   title: string;
   onClickHandler: (state: boolean) => void;
   icon: JSX.Element;
   styleString: string;
-}
+};
 
 export default function OptionButton({
   title,

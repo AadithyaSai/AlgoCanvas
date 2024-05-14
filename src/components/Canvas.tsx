@@ -11,13 +11,13 @@ import { FloodFill } from "../utils/fill";
 import { BresenhamLine, DDALine } from "../utils/lines";
 import { MidPointCircle } from "../utils/circles";
 
-interface CanvasProps {
+type CanvasProps = {
   algo: string;
   clear: boolean;
   mode: string;
   color: string;
   setClear: (clear: boolean) => void;
-}
+};
 
 export default function Canvas({
   algo,

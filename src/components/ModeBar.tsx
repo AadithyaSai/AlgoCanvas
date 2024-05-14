@@ -7,10 +7,10 @@ import {
 
 import ModeButton from "./ModeButton";
 
-interface ModeBarProps {
+type ModeBarProps = {
   mode: string;
   onModeChange: (mode: string) => void;
-}
+};
 
 export default function ModeBar({ mode, onModeChange }: ModeBarProps) {
   const drawIcon = <FontAwesomeIcon icon={faPen} />;

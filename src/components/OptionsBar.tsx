@@ -5,7 +5,7 @@ import ModeBar from "./ModeBar";
 import OptionButton from "./OptionButton";
 import AlgorithmSelect from "./AlgorithmSelect";
 
-interface OptionsBarProps {
+type OptionsBarProps = {
   mode: string;
   algo: string;
   color: string;
@@ -13,7 +13,7 @@ interface OptionsBarProps {
   onClear: (clear: boolean) => void;
   onModeChange: (mode: string) => void;
   onColorChange: (color: string) => void;
-}
+};
 
 export default function OptionsBar({
   mode,

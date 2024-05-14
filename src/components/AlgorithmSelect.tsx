@@ -1,8 +1,8 @@
-interface AlgorithmSelectProps {
+type AlgorithmSelectProps = {
   algo: string;
   onAlgoChange: (algo: string) => void;
   isDisabled: boolean;
-}
+};
 
 export default function AlgorithmSelect({
   algo,

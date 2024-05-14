@@ -1,9 +1,9 @@
-interface ModeButtonProps {
+type ModeButtonProps = {
   mode: string;
   globalMode: string;
   onGlobalModeChange: (mode: string) => void;
   icon: JSX.Element;
-}
+};
 
 export default function ModeButton({
   mode,

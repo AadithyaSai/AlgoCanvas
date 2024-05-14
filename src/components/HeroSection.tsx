@@ -1,6 +1,8 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRight } from "@fortawesome/free-solid-svg-icons";
 
+import AlgoCanvas from "../assets/img/AlgoCanvas.png";
+
 type HeroSectionProps = {
   handleButtonClick: (focus: boolean) => void;
 };
@@ -11,7 +13,7 @@ export default function HeroSection({ handleButtonClick }: HeroSectionProps) {
       <div className="grid max-w-screen-xl px-4 py-8 mx-auto sm:gap-8 xl:gap-0 sm:py-16 sm:grid-cols-12">
         <div className="flex justify-center col-span-full mx-0 animate-none mt-0 sm:col-span-5 sm:animate-bob sm:order-2">
           <img
-            src="src/assets/img/AlgoCanvas.png"
+            src={AlgoCanvas}
             alt="AlgoCanvas"
             className="object-contain w-2/3"
           />
