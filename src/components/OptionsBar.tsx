@@ -15,7 +15,7 @@ interface OptionsBarProps {
   onColorChange: (color: string) => void;
 }
 
-export function OptionsBar({
+export default function OptionsBar({
   mode,
   algo,
   color,
@@ -27,7 +27,7 @@ export function OptionsBar({
   const clearIcon = <FontAwesomeIcon icon={faTrashCan} />;
 
   return (
-    <div className="flex items-center justify-center lg:justify-between p-2">
+    <div className="flex items-center justify-center sm:justify-between p-2">
       <div className="flex">
         <ModeBar mode={mode} onModeChange={onModeChange} />
         <input

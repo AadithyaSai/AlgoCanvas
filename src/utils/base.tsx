@@ -9,6 +9,19 @@ export function setWindowBounds(w: number, h: number) {
   winY = h;
 }
 
+// Get the mouse position
+export function getMousePos(canvas: HTMLCanvasElement, evt: React.MouseEvent) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: Math.floor(
+      ((evt.clientX - rect.left) / (rect.right - rect.left)) * canvas.width
+    ),
+    y: Math.floor(
+      ((evt.clientY - rect.top) / (rect.bottom - rect.top)) * canvas.height
+    ),
+  };
+}
+
 // Get the window bounds
 export function getWindowBounds() {
   return { x: winX, y: winY };

@@ -22,11 +22,11 @@ export class DDALine extends Algorithm {
   dda() {
     const { x: x1, y: y1 } = this.inputBuffer[0];
     const { x: x2, y: y2 } = this.inputBuffer[1];
-    let dx = x2 - x1;
-    let dy = y2 - y1;
-    let steps = Math.abs(dx) > Math.abs(dy) ? Math.abs(dx) : Math.abs(dy);
-    let xInc = dx / steps;
-    let yInc = dy / steps;
+    const dx = x2 - x1;
+    const dy = y2 - y1;
+    const steps = Math.abs(dx) > Math.abs(dy) ? Math.abs(dx) : Math.abs(dy);
+    const xInc = dx / steps;
+    const yInc = dy / steps;
     let x = x1;
     let y = y1;
 
@@ -81,7 +81,7 @@ export class BresenhamLine extends Algorithm {
   }
 
   bresenhamLow(x1: number, y1: number, x2: number, y2: number) {
-    let dx = x2 - x1;
+    const dx = x2 - x1;
     let dy = y2 - y1;
     let yIncr = 10;
 
@@ -91,8 +91,8 @@ export class BresenhamLine extends Algorithm {
     }
 
     let p = 2 * dy - dx;
-    let twoDy = 2 * dy;
-    let twoDyMinusDx = 2 * (dy - dx);
+    const twoDy = 2 * dy;
+    const twoDyMinusDx = 2 * (dy - dx);
     let y = y1;
 
     for (let x = x1; x <= x2; x += 10) {
@@ -108,7 +108,7 @@ export class BresenhamLine extends Algorithm {
 
   bresenhamHigh(x1: number, y1: number, x2: number, y2: number) {
     let dx = x2 - x1;
-    let dy = y2 - y1;
+    const dy = y2 - y1;
     let xIncr = 10;
 
     if (dx < 0) {
@@ -117,8 +117,8 @@ export class BresenhamLine extends Algorithm {
     }
 
     let p = 2 * dx - dy;
-    let twoDx = 2 * dx;
-    let twoDxMinusDy = 2 * (dx - dy);
+    const twoDx = 2 * dx;
+    const twoDxMinusDy = 2 * (dx - dy);
     let x = x1;
 
     for (let y = y1; y <= y2; y += 10) {

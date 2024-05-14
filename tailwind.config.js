@@ -4,13 +4,52 @@ export default {
   theme: {
     extend: {
       keyframes: {
+        fade: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
+        },
         bob: {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-5%)" },
         },
+        "fade-in-up": {
+          "0%": { opacity: "0", transform: "translateY(20px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
+        up: {
+          "0%, 100%": { transform: "translateY(-1px)" },
+          "50%": { transform: "translateY(1px)" },
+        },
+        down: {
+          "0%, 100%": { transform: "translateY(1px)" },
+          "50%": { transform: "translateY(-1px)" },
+        },
+        shake: {
+          "10%, 90%": {
+            transform: "translate3d(-1px, 0, 0)",
+          },
+
+          "20%, 80%": {
+            transform: "translate3d(2px, 0, 0)",
+          },
+
+          "30%, 50%, 70%": {
+            transform: "translate3d(-4px, 0, 0)",
+          },
+
+          "40%, 60%": {
+            transform: "translate3d(4px, 0, 0)",
+          },
+        },
       },
       animation: {
         bob: "bob 3s ease-in-out infinite",
+        fade: "fade 1s ease-in-out forwards",
+        "fade-in-up": "fade-in-up 0.5s ease-out forwards",
+        "fade-in-up-slow": "fade-in-up 1.5s ease-out forwards",
+        up: "up 3s ease-in-out infinite",
+        down: "down 3s ease-in-out infinite",
+        shake: "shake 0.82s cubic-bezier(.36,.07,.19,.97) both 1.5s",
       },
       colors: {
         primary: {

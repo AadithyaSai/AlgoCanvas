@@ -10,8 +10,8 @@ export function drawPixel(
 
   if (ctx) {
     ctx.fillStyle = color;
-    let pixX = Math.floor(x / 10) * 10;
-    let pixY = Math.floor(y / 10) * 10;
+    const pixX = Math.floor(x / 10) * 10;
+    const pixY = Math.floor(y / 10) * 10;
     ctx.fillRect(pixX, pixY, pixSize, pixSize);
   }
 }

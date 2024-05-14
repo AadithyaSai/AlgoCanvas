@@ -22,7 +22,7 @@ export class MidPointCircle extends Algorithm {
   midPointCircle() {
     const { x: x1, y: y1 } = this.inputBuffer[0];
     const { x: x2, y: y2 } = this.inputBuffer[1];
-    let r = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+    const r = Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
     let x = 0;
     let y = r;
     let p = 1 - r;
